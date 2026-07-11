@@ -1,0 +1,131 @@
+---
+import { getDict, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { prices } = getDict(locale);
+---
+
+<section class="section" id="prices">
+  <div class="container">
+    <span class="section__kicker">{prices.kicker}</span>
+    <h2 class="section__title">{prices.title}</h2>
+    <p class="section__lead">{prices.lead}</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">{prices.colItem}</th>
+            <th scope="col">
+              {prices.colOff}
+              <span class="th-sub">{prices.colOffSub}</span>
+            </th>
+            <th scope="col">
+              {prices.colPeak}
+              <span class="th-sub">{prices.colPeakSub}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            prices.rows.map((row) => (
+              <tr>
+                <th scope="row">
+                  {row.label}
+                  {row.note && <span class="row-note">{row.note}</span>}
+                </th>
+                <td>{row.off}</td>
+                <td>{row.peak}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="footnote">{prices.footnote}</p>
+  </div>
+</section>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-top: 1.5rem;
+  }
+
+  table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+    font-size: 0.98rem;
+  }
+
+  thead th {
+    background: var(--blue-deep);
+    color: #fff;
+    text-align: left;
+    padding: 0.9rem 1.1rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  thead th + th {
+    text-align: right;
+    width: 175px;
+  }
+
+  .th-sub {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  tbody th {
+    text-align: left;
+    font-weight: 600;
+    color: var(--ink);
+    padding: 0.75rem 1.1rem;
+  }
+
+  tbody td {
+    text-align: right;
+    padding: 0.75rem 1.1rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--blue-dark);
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--mist);
+  }
+
+  tbody tr + tr {
+    border-top: 1px solid var(--line);
+  }
+
+  .row-note {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .footnote {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+</style>

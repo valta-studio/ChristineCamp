@@ -1,0 +1,33 @@
+---
+import { getDict, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { about } = getDict(locale);
+---
+
+<section class="section" id="about">
+  <div class="container about">
+    <span class="section__kicker">{about.kicker}</span>
+    <h2 class="section__title">{about.title}</h2>
+    <div class="about__text">
+      {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__text {
+    max-width: 46rem;
+    font-size: 1.06rem;
+    color: var(--muted);
+  }
+
+  .about__text p:last-child {
+    font-weight: 600;
+    color: var(--blue-deep);
+  }
+</style>

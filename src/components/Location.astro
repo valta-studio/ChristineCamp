@@ -1,0 +1,94 @@
+---
+import { getDict, SITE, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { location } = getDict(locale);
+
+const bbox = [SITE.lon - 0.045, SITE.lat - 0.02, SITE.lon + 0.045, SITE.lat + 0.02].join('%2C');
+const embedSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${SITE.lat}%2C${SITE.lon}`;
+const largeMap = `https://www.openstreetmap.org/?mlat=${SITE.lat}&mlon=${SITE.lon}#map=15/${SITE.lat}/${SITE.lon}`;
+const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  `Camping Primusbauer, ${SITE.street}, ${SITE.town}`,
+)}`;
+---
+
+<section class="section section--tint" id="location">
+  <div class="container">
+    <span class="section__kicker">{location.kicker}</span>
+    <h2 class="section__title">{location.title}</h2>
+    <p class="section__lead">{location.lead}</p>
+
+    <div class="location">
+      <div class="location__info">
+        <h3>{location.addressLabel}</h3>
+        <p>
+          {SITE.name}<br />
+          {SITE.street}<br />
+          {SITE.town}<br />
+          {SITE.country[locale]}
+        </p>
+        <a class="btn btn--primary" href={routeUrl} target="_blank" rel="noopener">
+          {location.directions}
+        </a>
+      </div>
+      <div class="location__map">
+        <iframe src={embedSrc} title={location.mapTitle} loading="lazy"></iframe>
+        <a class="location__maplink" href={largeMap} target="_blank" rel="noopener">
+          {location.mapLink}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .location {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) 2fr;
+    gap: 2rem;
+    margin-top: 1.8rem;
+    align-items: start;
+  }
+
+  .location__info {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.6rem 1.5rem;
+    box-shadow: 0 4px 14px rgba(13, 72, 100, 0.05);
+  }
+
+  .location__info h3 {
+    font-size: 1.1rem;
+  }
+
+  .location__info p {
+    color: var(--muted);
+    margin: 0 0 1.3rem;
+  }
+
+  .location__map iframe {
+    width: 100%;
+    height: 340px;
+    border: 0;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .location__maplink {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 780px) {
+    .location {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

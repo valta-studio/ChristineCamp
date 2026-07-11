@@ -1,0 +1,40 @@
+---
+import { getDict, SITE, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { footer } = getDict(locale);
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>
+      © {year} {SITE.name} {SITE.subtitle} · {SITE.owner}
+    </p>
+    <p>{footer.rights}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #092a3c;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.85rem;
+    padding: 1.4rem 0;
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .footer p {
+    margin: 0;
+  }
+</style>

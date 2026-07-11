@@ -1,0 +1,231 @@
+---
+import logo from '../assets/logo.svg';
+import { getDict, SITE, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { nav } = getDict(locale);
+
+const links = [
+  { href: '#about', label: nav.about },
+  { href: '#features', label: nav.features },
+  { href: '#prices', label: nav.prices },
+  { href: '#location', label: nav.location },
+  { href: '#contact', label: nav.contact },
+];
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href={locale === 'de' ? '/' : '/en/'}>
+      <img class="brand__mark" src={logo.src} alt="" width="56" height="26" />
+      <span class="brand__text">
+        <span class="brand__camping">Camping</span>
+        <span class="brand__name">Primusbauer</span>
+        <span class="brand__sub">{SITE.subtitle}</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="sr-only">{nav.menuLabel}</span>
+    </button>
+
+    <nav class="nav" id="site-nav">
+      <ul class="nav__list">
+        {
+          links.map((link) => (
+            <li>
+              <a class="nav__link" href={link.href}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a class="nav__link nav__link--lang" href={nav.switchHref} lang={locale === 'de' ? 'en' : 'de'}>
+            {nav.switchLabel}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.querySelector<HTMLElement>('.nav');
+
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('nav--open') ?? false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  nav?.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('a')) {
+      nav.classList.remove('nav--open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 72px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+  }
+
+  .brand__mark {
+    width: 56px;
+    height: 26px;
+  }
+
+  .brand__text {
+    display: grid;
+    line-height: 1.05;
+  }
+
+  .brand__camping {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--accent);
+  }
+
+  .brand__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--blue);
+  }
+
+  .brand__sub {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    color: var(--stone);
+  }
+
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__link {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav__link:hover {
+    color: var(--blue);
+  }
+
+  .nav__link--lang {
+    padding: 0.3rem 0.85rem;
+    border: 1.5px solid var(--blue);
+    border-radius: 999px;
+    color: var(--blue);
+  }
+
+  .nav__link--lang:hover {
+    background: var(--blue);
+    color: #fff;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0.6rem;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .nav-toggle__bar {
+    width: 24px;
+    height: 2.5px;
+    border-radius: 2px;
+    background: var(--blue-deep);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 780px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .nav.nav--open {
+      display: block;
+    }
+
+    .nav__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0.5rem 0;
+    }
+
+    .nav__link {
+      display: block;
+      padding: 0.8rem 1.25rem;
+    }
+
+    .nav__link--lang {
+      margin: 0.5rem 1.25rem 0.8rem;
+      border-radius: 999px;
+      text-align: center;
+    }
+  }
+</style>

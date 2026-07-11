@@ -1,0 +1,110 @@
+---
+import { getDict, SITE, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { contact } = getDict(locale);
+---
+
+<section class="section contact" id="contact">
+  <div class="container">
+    <span class="section__kicker contact__kicker">{contact.kicker}</span>
+    <h2 class="section__title contact__title">{contact.title}</h2>
+    <p class="section__lead contact__lead">{contact.lead}</p>
+
+    <div class="contact__grid">
+      <a class="contact__card" href={`tel:${SITE.phoneHref}`}>
+        <span class="contact__label">{contact.phoneLabel}</span>
+        <span class="contact__value">{SITE.phoneDisplay}</span>
+      </a>
+      <a class="contact__card" href={`mailto:${SITE.email}`}>
+        <span class="contact__label">{contact.emailLabel}</span>
+        <span class="contact__value">{SITE.email}</span>
+      </a>
+      <div class="contact__card contact__card--static">
+        <span class="contact__label">{contact.addressLabel}</span>
+        <span class="contact__value contact__value--small">
+          {SITE.street}, {SITE.town}
+        </span>
+      </div>
+    </div>
+    <p class="contact__host">{contact.host}</p>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: linear-gradient(150deg, var(--blue-deep) 0%, var(--blue-dark) 55%, var(--blue) 100%);
+    color: #fff;
+  }
+
+  .contact__kicker {
+    color: #ffb59e;
+  }
+
+  .contact__title {
+    color: #fff;
+  }
+
+  .contact__lead {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.1rem;
+    margin-top: 1.8rem;
+  }
+
+  .contact__card {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1.35rem 1.4rem;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+  }
+
+  a.contact__card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .contact__label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .contact__value {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    overflow-wrap: anywhere;
+  }
+
+  .contact__value--small {
+    font-size: 1.05rem;
+  }
+
+  .contact__host {
+    margin-top: 1.6rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a.contact__card:hover {
+      transform: none;
+    }
+  }
+</style>
