@@ -1,14 +1,14 @@
 ---
 import { Picture } from 'astro:assets';
 import lake from '../assets/lake.jpg';
-import { getDict, SITE, type Locale } from '../i18n';
+import { getT, SITE, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const { hero } = getDict(locale);
+const t = getT(locale);
 ---
 
 <section class="hero">
@@ -18,7 +18,7 @@ const { hero } = getDict(locale);
     widths={[640, 1024, 1600, 2048]}
     sizes="100vw"
     formats={['avif', 'webp']}
-    alt={hero.tagline}
+    alt={t('hero.tagline')}
     loading="eager"
     fetchpriority="high"
   />
@@ -29,11 +29,11 @@ const { hero } = getDict(locale);
       {SITE.name.replace('Camping ', '')}
       <span class="hero__sub">{SITE.subtitle}</span>
     </h1>
-    <p class="hero__tagline">{hero.tagline}</p>
-    <p class="hero__intro">{hero.intro}</p>
+    <p class="hero__tagline">{t('hero.tagline')}</p>
+    <p class="hero__intro">{t('hero.intro')}</p>
     <div class="hero__actions">
-      <a class="btn btn--primary" href="#prices">{hero.ctaPrices}</a>
-      <a class="btn btn--ghost" href="#contact">{hero.ctaContact}</a>
+      <a class="btn btn--primary" href="#prices">{t('hero.ctaPrices')}</a>
+      <a class="btn btn--ghost" href="#contact">{t('hero.ctaContact')}</a>
     </div>
   </div>
 </section>
@@ -42,7 +42,7 @@ const { hero } = getDict(locale);
   .hero {
     position: relative;
     display: grid;
-    align-items: end;
+    align-items: center;
     min-height: min(88vh, 780px);
     overflow: hidden;
   }
