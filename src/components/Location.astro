@@ -1,12 +1,12 @@
 ---
-import { getDict, SITE, type Locale } from '../i18n';
+import { getT, SITE, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const { location } = getDict(locale);
+const t = getT(locale);
 
 const bbox = [SITE.lon - 0.045, SITE.lat - 0.02, SITE.lon + 0.045, SITE.lat + 0.02].join('%2C');
 const embedSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${SITE.lat}%2C${SITE.lon}`;
@@ -16,15 +16,15 @@ const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURI
 )}`;
 ---
 
-<section class="section section--tint" id="location">
+<section class="section" id="location">
   <div class="container">
-    <span class="section__kicker">{location.kicker}</span>
-    <h2 class="section__title">{location.title}</h2>
-    <p class="section__lead">{location.lead}</p>
+    <span class="section__kicker">{t('location.kicker')}</span>
+    <h2 class="section__title">{t('location.title')}</h2>
+    <p class="section__lead">{t('location.lead')}</p>
 
     <div class="location">
       <div class="location__info">
-        <h3>{location.addressLabel}</h3>
+        <h3>{t('location.addressLabel')}</h3>
         <p>
           {SITE.name}<br />
           {SITE.street}<br />
@@ -32,13 +32,13 @@ const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURI
           {SITE.country[locale]}
         </p>
         <a class="btn btn--primary" href={routeUrl} target="_blank" rel="noopener">
-          {location.directions}
+          {t('location.directions')}
         </a>
       </div>
       <div class="location__map">
-        <iframe src={embedSrc} title={location.mapTitle} loading="lazy"></iframe>
+        <iframe src={embedSrc} title={t('location.mapTitle')} loading="lazy"></iframe>
         <a class="location__maplink" href={largeMap} target="_blank" rel="noopener">
-          {location.mapLink}
+          {t('location.mapLink')}
         </a>
       </div>
     </div>

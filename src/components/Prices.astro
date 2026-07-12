@@ -1,38 +1,39 @@
 ---
-import { getDict, type Locale } from '../i18n';
+import { getT, type Locale, type PriceRow } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const { prices } = getDict(locale);
+const t = getT(locale);
+const rows = t('prices.rows', { returnObjects: true }) as PriceRow[];
 ---
 
 <section class="section" id="prices">
   <div class="container">
-    <span class="section__kicker">{prices.kicker}</span>
-    <h2 class="section__title">{prices.title}</h2>
-    <p class="section__lead">{prices.lead}</p>
+    <span class="section__kicker">{t('prices.kicker')}</span>
+    <h2 class="section__title">{t('prices.title')}</h2>
+    <p class="section__lead">{t('prices.lead')}</p>
 
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th scope="col">{prices.colItem}</th>
+            <th scope="col">{t('prices.colItem')}</th>
             <th scope="col">
-              {prices.colOff}
-              <span class="th-sub">{prices.colOffSub}</span>
+              {t('prices.colOff')}
+              <span class="th-sub">{t('prices.colOffSub')}</span>
             </th>
             <th scope="col">
-              {prices.colPeak}
-              <span class="th-sub">{prices.colPeakSub}</span>
+              {t('prices.colPeak')}
+              <span class="th-sub">{t('prices.colPeakSub')}</span>
             </th>
           </tr>
         </thead>
         <tbody>
           {
-            prices.rows.map((row) => (
+            rows.map((row) => (
               <tr>
                 <th scope="row">
                   {row.label}
@@ -46,7 +47,7 @@ const { prices } = getDict(locale);
         </tbody>
       </table>
     </div>
-    <p class="footnote">{prices.footnote}</p>
+    <p class="footnote">{t('prices.footnote')}</p>
   </div>
 </section>
 

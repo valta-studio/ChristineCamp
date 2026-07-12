@@ -1,26 +1,29 @@
 ---
 import logo from '../assets/logo.svg';
-import { getDict, SITE, type Locale } from '../i18n';
+import { getT, getLocaleMeta, LOCALES, SITE, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const { nav } = getDict(locale);
+const t = getT(locale);
 
 const links = [
-  { href: '#about', label: nav.about },
-  { href: '#features', label: nav.features },
-  { href: '#prices', label: nav.prices },
-  { href: '#location', label: nav.location },
-  { href: '#contact', label: nav.contact },
+  { href: '#about', label: t('nav.about') },
+  { href: '#features', label: t('nav.features') },
+  { href: '#prices', label: t('nav.prices') },
+  { href: '#explore', label: t('nav.explore') },
+  { href: '#location', label: t('nav.location') },
+  { href: '#contact', label: t('nav.contact') },
 ];
+
+const homePath = getLocaleMeta(locale).path;
 ---
 
 <header class="header">
   <div class="container header__inner">
-    <a class="brand" href={locale === 'de' ? '/' : '/en/'}>
+    <a class="brand" href={homePath}>
       <img class="brand__mark" src={logo.src} alt="" width="56" height="26" />
       <span class="brand__text">
         <span class="brand__camping">Camping</span>
@@ -33,7 +36,7 @@ const links = [
       <span class="nav-toggle__bar"></span>
       <span class="nav-toggle__bar"></span>
       <span class="nav-toggle__bar"></span>
-      <span class="sr-only">{nav.menuLabel}</span>
+      <span class="sr-only">{t('nav.menuLabel')}</span>
     </button>
 
     <nav class="nav" id="site-nav">
@@ -47,10 +50,20 @@ const links = [
             </li>
           ))
         }
-        <li>
-          <a class="nav__link nav__link--lang" href={nav.switchHref} lang={locale === 'de' ? 'en' : 'de'}>
-            {nav.switchLabel}
-          </a>
+        <li class="nav__langs" aria-label={t('nav.langLabel')}>
+          {
+            LOCALES.map((l) => (
+              <a
+                class:list={['nav__lang', { 'nav__lang--active': l.code === locale }]}
+                href={l.path}
+                lang={l.code}
+                title={l.label}
+                aria-current={l.code === locale ? 'page' : undefined}
+              >
+                {l.short}
+              </a>
+            ))
+          }
         </li>
       </ul>
     </nav>
@@ -152,16 +165,35 @@ const links = [
     color: var(--blue);
   }
 
-  .nav__link--lang {
-    padding: 0.3rem 0.85rem;
+  .nav__langs {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.2rem;
     border: 1.5px solid var(--blue);
     border-radius: 999px;
-    color: var(--blue);
   }
 
-  .nav__link--lang:hover {
+  .nav__lang {
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .nav__lang:hover {
+    background: var(--mist);
+  }
+
+  .nav__lang--active {
     background: var(--blue);
     color: #fff;
+  }
+
+  .nav__lang--active:hover {
+    background: var(--blue);
   }
 
   .nav-toggle {
@@ -222,10 +254,15 @@ const links = [
       padding: 0.8rem 1.25rem;
     }
 
-    .nav__link--lang {
+    .nav__langs {
       margin: 0.5rem 1.25rem 0.8rem;
-      border-radius: 999px;
+      justify-content: center;
+    }
+
+    .nav__lang {
+      flex: 1;
       text-align: center;
+      padding: 0.45rem 0.6rem;
     }
   }
 </style>

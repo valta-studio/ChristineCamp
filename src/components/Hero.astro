@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import lake from '../assets/lake.jpg';
+import logoMark from '../assets/logo.svg';
 import { getT, SITE, type Locale } from '../i18n';
 
 interface Props {
@@ -24,6 +25,7 @@ const t = getT(locale);
   />
   <div class="hero__overlay"></div>
   <div class="container hero__content">
+    <img class="hero__logo" src={logoMark.src} alt="" width="138" height="63" loading="eager" />
     <p class="hero__camping">Camping</p>
     <h1 class="hero__title">
       {SITE.name.replace('Camping ', '')}
@@ -69,8 +71,14 @@ const t = getT(locale);
   .hero__content {
     position: relative;
     color: #fff;
-    padding: 6.5rem 0 4.5rem;
+    padding: 5rem 0;
     max-width: 1080px;
+  }
+
+  .hero :global(.hero__logo) {
+    display: block;
+    margin-bottom: 0.9rem;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
   }
 
   .hero__camping {

@@ -1,7 +1,9 @@
+import i18next from 'i18next';
 import { de } from './de';
 import { en } from './en';
+import { cs } from './cs';
 
-export type Locale = 'de' | 'en';
+export type Locale = 'de' | 'en' | 'cs';
 
 export interface PriceRow {
   label: string;
@@ -16,6 +18,12 @@ export interface Feature {
   text: string;
 }
 
+export interface Sight {
+  title: string;
+  distance: string;
+  text: string;
+}
+
 export interface Dictionary {
   meta: {
     title: string;
@@ -25,10 +33,10 @@ export interface Dictionary {
     about: string;
     features: string;
     prices: string;
+    explore: string;
     location: string;
     contact: string;
-    switchLabel: string;
-    switchHref: string;
+    langLabel: string;
     menuLabel: string;
   };
   hero: {
@@ -59,6 +67,14 @@ export interface Dictionary {
     rows: PriceRow[];
     footnote: string;
   };
+  explore: {
+    kicker: string;
+    title: string;
+    lead: string;
+    items: Sight[];
+    activitiesTitle: string;
+    activities: string[];
+  };
   location: {
     kicker: string;
     title: string;
@@ -88,7 +104,7 @@ export const SITE = {
   owner: 'Christine Bruckenberger',
   street: 'Schwand 43',
   town: 'A-5342 Abersee am Wolfgangsee',
-  country: { de: 'Österreich', en: 'Austria' },
+  country: { de: 'Österreich', en: 'Austria', cs: 'Rakousko' },
   email: 'office@camping-primusbauer.at',
   phoneDisplay: '+43 (0) 664 / 914 96 97',
   phoneHref: '+436649149697',
@@ -96,8 +112,36 @@ export const SITE = {
   lon: 13.4091,
 } as const;
 
-export const translations: Record<Locale, Dictionary> = { de, en };
+export const LOCALES = [
+  { code: 'de', label: 'Deutsch', short: 'DE', path: '/', ogLocale: 'de_AT' },
+  { code: 'en', label: 'English', short: 'EN', path: '/en/', ogLocale: 'en_GB' },
+  { code: 'cs', label: 'Česky', short: 'CS', path: '/cs/', ogLocale: 'cs_CZ' },
+] as const satisfies ReadonlyArray<{
+  code: Locale;
+  label: string;
+  short: string;
+  path: string;
+  ogLocale: string;
+}>;
 
-export function getDict(locale: Locale): Dictionary {
-  return translations[locale];
+export function getLocaleMeta(locale: Locale) {
+  return LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
+}
+
+i18next.init({
+  resources: {
+    de: { translation: de },
+    en: { translation: en },
+    cs: { translation: cs },
+  },
+  lng: 'de',
+  fallbackLng: 'de',
+  supportedLngs: LOCALES.map((l) => l.code),
+  initImmediate: false,
+  interpolation: { escapeValue: false },
+});
+
+/** Fixed translator for one locale; use `{ returnObjects: true }` for arrays/objects. */
+export function getT(locale: Locale) {
+  return i18next.getFixedT(locale);
 }

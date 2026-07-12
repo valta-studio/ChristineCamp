@@ -10,10 +10,10 @@ export const de: Dictionary = {
     about: 'Der Platz',
     features: 'Ausstattung',
     prices: 'Preise',
+    explore: 'Ausflüge',
     location: 'Anfahrt',
     contact: 'Kontakt',
-    switchLabel: 'English',
-    switchHref: '/en/',
+    langLabel: 'Sprache',
     menuLabel: 'Menü',
   },
   hero: {
@@ -108,6 +108,52 @@ export const de: Dictionary = {
     ],
     footnote:
       'Nebensaison: Mai, Juni und September · Hauptsaison: Juli und August. Änderungen vorbehalten.',
+  },
+  explore: {
+    kicker: 'Ausflüge & Freizeit',
+    title: 'Entdecken Sie die Umgebung',
+    lead: 'Der Wolfgangsee liegt mitten im Salzkammergut – viele der schönsten Ausflugsziele Österreichs erreichen Sie vom Campingplatz aus in kurzer Zeit.',
+    items: [
+      {
+        title: 'Schafbergbahn',
+        distance: 'ca. 10 km',
+        text: 'Mit der nostalgischen Zahnradbahn von St. Wolfgang auf 1.783 m – oben erwartet Sie einer der schönsten Panoramablicke über die Seen des Salzkammerguts.',
+      },
+      {
+        title: 'St. Wolfgang',
+        distance: 'ca. 10 km',
+        text: 'Der berühmte Wallfahrtsort mit der Pilgerkirche und dem Pacher-Altar, gemütlicher Seepromenade und dem legendären Weißen Rössl.',
+      },
+      {
+        title: 'Zwölferhorn-Seilbahn',
+        distance: 'ca. 8 km',
+        text: 'Die Seilbahn in St. Gilgen bringt Sie auf 1.522 m – Ausgangspunkt für Wanderungen mit herrlichem Blick auf See und Berge.',
+      },
+      {
+        title: 'Wolfgangsee-Schifffahrt',
+        distance: 'ab Strobl',
+        text: 'Mit dem Linienschiff über den See: Die Schiffe verbinden Strobl, St. Wolfgang und St. Gilgen – eine entspannte Rundfahrt mit Bergpanorama.',
+      },
+      {
+        title: 'Salzburg',
+        distance: 'ca. 35 km',
+        text: 'Die Mozartstadt mit ihrer barocken Altstadt (UNESCO-Weltkulturerbe) und der Festung Hohensalzburg ist in rund 40 Minuten erreichbar.',
+      },
+      {
+        title: 'Bad Ischl & Hallstatt',
+        distance: 'ca. 20–35 km',
+        text: 'Die Kaiserstadt Bad Ischl mit der Kaiservilla und das weltberühmte Hallstatt am Hallstätter See sind ideale Tagesausflüge.',
+      },
+    ],
+    activitiesTitle: 'Aktivitäten am See',
+    activities: [
+      'Baden im glasklaren Wasser',
+      'Stand-up-Paddeln & Kajak',
+      'Segeln & Surfen',
+      'Wandern & Bergtouren',
+      'Radfahren rund um den See',
+      'Bootsausflüge',
+    ],
   },
   location: {
     kicker: 'Anfahrt',

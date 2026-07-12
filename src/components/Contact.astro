@@ -1,37 +1,37 @@
 ---
-import { getDict, SITE, type Locale } from '../i18n';
+import { getT, SITE, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const { contact } = getDict(locale);
+const t = getT(locale);
 ---
 
 <section class="section contact" id="contact">
   <div class="container">
-    <span class="section__kicker contact__kicker">{contact.kicker}</span>
-    <h2 class="section__title contact__title">{contact.title}</h2>
-    <p class="section__lead contact__lead">{contact.lead}</p>
+    <span class="section__kicker contact__kicker">{t('contact.kicker')}</span>
+    <h2 class="section__title contact__title">{t('contact.title')}</h2>
+    <p class="section__lead contact__lead">{t('contact.lead')}</p>
 
     <div class="contact__grid">
       <a class="contact__card" href={`tel:${SITE.phoneHref}`}>
-        <span class="contact__label">{contact.phoneLabel}</span>
+        <span class="contact__label">{t('contact.phoneLabel')}</span>
         <span class="contact__value">{SITE.phoneDisplay}</span>
       </a>
       <a class="contact__card" href={`mailto:${SITE.email}`}>
-        <span class="contact__label">{contact.emailLabel}</span>
+        <span class="contact__label">{t('contact.emailLabel')}</span>
         <span class="contact__value">{SITE.email}</span>
       </a>
       <div class="contact__card contact__card--static">
-        <span class="contact__label">{contact.addressLabel}</span>
+        <span class="contact__label">{t('contact.addressLabel')}</span>
         <span class="contact__value contact__value--small">
           {SITE.street}, {SITE.town}
         </span>
       </div>
     </div>
-    <p class="contact__host">{contact.host}</p>
+    <p class="contact__host">{t('contact.host')}</p>
   </div>
 </section>
 

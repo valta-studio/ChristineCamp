@@ -1,12 +1,13 @@
 ---
-import { getDict, type Locale } from '../i18n';
+import { getT, type Feature, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const { features } = getDict(locale);
+const t = getT(locale);
+const items = t('features.items', { returnObjects: true }) as Feature[];
 
 const icons: Record<string, string> = {
   wave: 'M2 17c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2M2 12c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2',
@@ -20,11 +21,11 @@ const icons: Record<string, string> = {
 
 <section class="section section--tint" id="features">
   <div class="container">
-    <span class="section__kicker">{features.kicker}</span>
-    <h2 class="section__title">{features.title}</h2>
+    <span class="section__kicker">{t('features.kicker')}</span>
+    <h2 class="section__title">{t('features.title')}</h2>
     <ul class="grid">
       {
-        features.items.map((item) => (
+        items.map((item) => (
           <li class="card">
             <span class="card__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">

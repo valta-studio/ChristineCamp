@@ -5,6 +5,6 @@ export default defineConfig({
   site: 'https://www.camping-primusbauer.at',
   i18n: {
     defaultLocale: 'de',
-    locales: ['de', 'en'],
+    locales: ['de', 'en', 'cs'],
   },
 });

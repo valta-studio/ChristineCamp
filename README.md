@@ -6,8 +6,9 @@ Static website for the family-run campsite **Camping Primusbauer** in Abersee am
 
 - German (default): `/`
 - English: `/en/`
+- Czech: `/cs/`
 
-All texts and the 2026 price table live in `src/i18n/de.ts` and `src/i18n/en.ts`.
+Translations are managed with [i18next](https://www.i18next.com/): resources live in `src/i18n/de.ts`, `src/i18n/en.ts` and `src/i18n/cs.ts` and are resolved at build time via `getT(locale)` from `src/i18n/index.ts` (German is the fallback language).
 
 ## Development
 
@@ -27,4 +28,4 @@ The `dist/` folder can be deployed to any static host (Netlify, Vercel, GitHub P
 
 ## Updating prices
 
-Edit the `prices.rows` arrays in `src/i18n/de.ts` and `src/i18n/en.ts` — the table renders from this data on both language versions.
+Edit the `prices.rows` arrays in `src/i18n/de.ts`, `src/i18n/en.ts` and `src/i18n/cs.ts` — the table renders from this data on all language versions.

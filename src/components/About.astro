@@ -1,20 +1,21 @@
 ---
-import { getDict, type Locale } from '../i18n';
+import { getT, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const { about } = getDict(locale);
+const t = getT(locale);
+const paragraphs = t('about.paragraphs', { returnObjects: true }) as string[];
 ---
 
 <section class="section" id="about">
   <div class="container about">
-    <span class="section__kicker">{about.kicker}</span>
-    <h2 class="section__title">{about.title}</h2>
+    <span class="section__kicker">{t('about.kicker')}</span>
+    <h2 class="section__title">{t('about.title')}</h2>
     <div class="about__text">
-      {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </div>
 </section>

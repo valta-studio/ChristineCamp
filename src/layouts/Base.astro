@@ -1,7 +1,7 @@
 ---
 import { getImage } from 'astro:assets';
 import lake from '../assets/lake.jpg';
-import { getDict, type Locale } from '../i18n';
+import { getT, getLocaleMeta, LOCALES, type Locale } from '../i18n';
 import '../styles/global.css';
 
 interface Props {
@@ -9,14 +9,13 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const dict = getDict(locale);
+const t = getT(locale);
+const localeMeta = getLocaleMeta(locale);
 
 const ogImage = await getImage({ src: lake, width: 1200, height: 630, format: 'jpeg' });
 
 const site = Astro.site ?? new URL('http://localhost:4321');
-const canonical = new URL(locale === 'de' ? '/' : '/en/', site);
-const alternateDe = new URL('/', site);
-const alternateEn = new URL('/en/', site);
+const canonical = new URL(localeMeta.path, site);
 ---
 
 <!doctype html>
@@ -24,19 +23,18 @@ const alternateEn = new URL('/en/', site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{dict.meta.title}</title>
-    <meta name="description" content={dict.meta.description} />
+    <title>{t('meta.title')}</title>
+    <meta name="description" content={t('meta.description')} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="de" href={alternateDe} />
-    <link rel="alternate" hreflang="en" href={alternateEn} />
-    <link rel="alternate" hreflang="x-default" href={alternateDe} />
+    {LOCALES.map((l) => <link rel="alternate" hreflang={l.code} href={new URL(l.path, site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL('/', site)} />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={dict.meta.title} />
-    <meta property="og:description" content={dict.meta.description} />
+    <meta property="og:title" content={t('meta.title')} />
+    <meta property="og:description" content={t('meta.description')} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(ogImage.src, site)} />
-    <meta property="og:locale" content={locale === 'de' ? 'de_AT' : 'en_GB'} />
+    <meta property="og:locale" content={localeMeta.ogLocale} />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>

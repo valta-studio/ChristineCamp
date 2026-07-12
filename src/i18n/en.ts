@@ -10,10 +10,10 @@ export const en: Dictionary = {
     about: 'The Site',
     features: 'Facilities',
     prices: 'Prices',
+    explore: 'Things to do',
     location: 'Directions',
     contact: 'Contact',
-    switchLabel: 'Deutsch',
-    switchHref: '/',
+    langLabel: 'Language',
     menuLabel: 'Menu',
   },
   hero: {
@@ -108,6 +108,52 @@ export const en: Dictionary = {
     ],
     footnote:
       'Off-season: May, June and September · Peak season: July and August. Subject to change.',
+  },
+  explore: {
+    kicker: 'Trips & leisure',
+    title: 'Explore the area',
+    lead: 'Lake Wolfgang lies in the heart of the Salzkammergut – many of Austria’s most beautiful destinations are a short trip from the campsite.',
+    items: [
+      {
+        title: 'Schafberg Railway',
+        distance: 'approx. 10 km',
+        text: 'Ride the nostalgic cog railway from St. Wolfgang up to 1,783 m – at the top, one of the finest panoramic views over the lakes of the Salzkammergut awaits.',
+      },
+      {
+        title: 'St. Wolfgang',
+        distance: 'approx. 10 km',
+        text: 'The famous pilgrimage village with its church and the Pacher altar, a charming lakeside promenade and the legendary White Horse Inn.',
+      },
+      {
+        title: 'Zwölferhorn Cable Car',
+        distance: 'approx. 8 km',
+        text: 'The cable car in St. Gilgen takes you up to 1,522 m – the starting point for hikes with wonderful views of the lake and mountains.',
+      },
+      {
+        title: 'Lake Wolfgang Boats',
+        distance: 'from Strobl',
+        text: 'Cross the lake by scheduled boat: the ships connect Strobl, St. Wolfgang and St. Gilgen – a relaxed round trip with mountain scenery.',
+      },
+      {
+        title: 'Salzburg',
+        distance: 'approx. 35 km',
+        text: 'Mozart’s city with its baroque old town (UNESCO World Heritage) and the Hohensalzburg Fortress is about 40 minutes away.',
+      },
+      {
+        title: 'Bad Ischl & Hallstatt',
+        distance: 'approx. 20–35 km',
+        text: 'The imperial town of Bad Ischl with the Kaiservilla and world-famous Hallstatt on Lake Hallstatt make perfect day trips.',
+      },
+    ],
+    activitiesTitle: 'Activities at the lake',
+    activities: [
+      'Swimming in crystal-clear water',
+      'Stand-up paddling & kayaking',
+      'Sailing & windsurfing',
+      'Hiking & mountain tours',
+      'Cycling around the lake',
+      'Boat trips',
+    ],
   },
   location: {
     kicker: 'Directions',
