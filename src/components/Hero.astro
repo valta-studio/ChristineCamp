@@ -34,8 +34,8 @@ const t = getT(locale);
     <p class="hero__tagline">{t('hero.tagline')}</p>
     <p class="hero__intro">{t('hero.intro')}</p>
     <div class="hero__actions">
-      <a class="btn btn--primary" href="#prices">{t('hero.ctaPrices')}</a>
-      <a class="btn btn--ghost" href="#contact">{t('hero.ctaContact')}</a>
+      <a class="btn btn--primary" href="#contact">{t('hero.ctaContact')}</a>
+      <a class="btn btn--ghost" href="#prices">{t('hero.ctaPrices')}</a>
     </div>
   </div>
 </section>
@@ -73,11 +73,12 @@ const t = getT(locale);
     color: #fff;
     padding: 5rem 0;
     max-width: 1080px;
+    text-align: center;
   }
 
   .hero :global(.hero__logo) {
     display: block;
-    margin-bottom: 0.9rem;
+    margin: 0 auto 0.9rem;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
   }
 
@@ -119,13 +120,25 @@ const t = getT(locale);
     max-width: 34rem;
     font-size: 1.05rem;
     color: rgba(255, 255, 255, 0.92);
-    margin: 0 0 1.8rem;
+    margin: 0 auto 1.8rem;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.9rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero__actions .btn {
+      width: 100%;
+    }
   }
 </style>
