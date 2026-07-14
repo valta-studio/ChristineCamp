@@ -8,6 +8,7 @@ export const de: Dictionary = {
   },
   nav: {
     about: 'Der Platz',
+    gallery: 'Galerie',
     features: 'Ausstattung',
     prices: 'Preise',
     explore: 'Ausflüge',
@@ -30,6 +31,29 @@ export const de: Dictionary = {
       'Unser Campingplatz liegt in Schwand bei Abersee, unmittelbar am Südufer des Wolfgangsees – zwischen St. Gilgen und Strobl, mitten im Salzkammergut. Vom Platz aus sind es nur wenige Schritte bis zum Kiesstrand und ins klare Wasser des Sees.',
       'Ob mit Zelt, Wohnwagen oder Wohnmobil: Bei uns finden Sie Ihren Platz zum Durchatmen. Die Seeuferplätze bieten freien Blick über den See bis zu den Bergen – ideal zum Baden, für Bootsausflüge und als Ausgangspunkt für Wanderungen auf Schafberg und Zwölferhorn.',
       'Wir freuen uns auf Ihren Besuch – Familie Bruckenberger.',
+    ],
+  },
+  gallery: {
+    kicker: 'Impressionen',
+    title: 'Einblicke in den Campingplatz',
+    lead:
+      'Vom Stellplatz bis zum Seeufer: Entdecken Sie den Campingplatz und die Bergwelt rund um den Wolfgangsee.',
+    openLabel: 'Foto öffnen',
+    viewerLabel: 'Fotogalerie',
+    closeLabel: 'Galerie schließen',
+    previousLabel: 'Vorheriges Foto',
+    nextLabel: 'Nächstes Foto',
+    images: [
+      'Kiesstrand am Wolfgangsee mit Blick auf die bewaldeten Berge',
+      'Kurzer Weg vom Campingplatz zum Wolfgangsee',
+      'Großzügige Campingwiese vor dem Bergpanorama des Salzkammerguts',
+      'Sonnenuntergang zwischen Wohnwagen und Bergen',
+      'Grüne Wiese mit Blick auf die markanten Gipfel bei Abersee',
+      'Aussicht vom Stellplatz auf Wiese und Berge',
+      'Blick vom Schafberg auf den türkisblauen Wolfgangsee',
+      'Abendstimmung über dem Campingplatz',
+      'Campingweg zwischen Wohnwagen unter blauem Himmel',
+      'Weite Wiese und Berglandschaft bei Abersee',
     ],
   },
   features: {

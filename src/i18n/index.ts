@@ -31,6 +31,7 @@ export interface Dictionary {
   };
   nav: {
     about: string;
+    gallery: string;
     features: string;
     prices: string;
     explore: string;
@@ -49,6 +50,17 @@ export interface Dictionary {
     kicker: string;
     title: string;
     paragraphs: string[];
+  };
+  gallery: {
+    kicker: string;
+    title: string;
+    lead: string;
+    openLabel: string;
+    viewerLabel: string;
+    closeLabel: string;
+    previousLabel: string;
+    nextLabel: string;
+    images: string[];
   };
   features: {
     kicker: string;

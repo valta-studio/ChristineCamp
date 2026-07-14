@@ -1,7 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
-import lake from '../assets/lake.jpg';
-import { getT, getLocaleMeta, LOCALES, type Locale } from '../i18n';
+import { getT, getLocaleMeta, LOCALES, SITE, type Locale } from '../i18n';
 import '../styles/global.css';
 
 interface Props {
@@ -12,10 +10,33 @@ const { locale } = Astro.props;
 const t = getT(locale);
 const localeMeta = getLocaleMeta(locale);
 
-const ogImage = await getImage({ src: lake, width: 1200, height: 630, format: 'jpeg' });
-
 const site = Astro.site ?? new URL('http://localhost:4321');
 const canonical = new URL(localeMeta.path, site);
+const socialImage = new URL('/social-preview.png', site);
+const brandLogo = new URL('/logo.png', site);
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Campground',
+  name: SITE.name,
+  url: canonical.href,
+  logo: brandLogo.href,
+  image: socialImage.href,
+  description: t('meta.description'),
+  telephone: SITE.phoneHref,
+  email: SITE.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.street,
+    addressLocality: 'Abersee am Wolfgangsee',
+    postalCode: '5342',
+    addressCountry: 'AT',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: SITE.lat,
+    longitude: SITE.lon,
+  },
+};
 ---
 
 <!doctype html>
@@ -30,11 +51,23 @@ const canonical = new URL(localeMeta.path, site);
     {LOCALES.map((l) => <link rel="alternate" hreflang={l.code} href={new URL(l.path, site)} />)}
     <link rel="alternate" hreflang="x-default" href={new URL('/', site)} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={t('meta.title')} />
     <meta property="og:description" content={t('meta.description')} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(ogImage.src, site)} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:secure_url" content={socialImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Camping Primusbauer am Wolfgangsee" />
     <meta property="og:locale" content={localeMeta.ogLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t('meta.title')} />
+    <meta name="twitter:description" content={t('meta.description')} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content="Camping Primusbauer am Wolfgangsee" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>

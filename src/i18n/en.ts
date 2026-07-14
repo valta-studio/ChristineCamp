@@ -8,6 +8,7 @@ export const en: Dictionary = {
   },
   nav: {
     about: 'The Site',
+    gallery: 'Gallery',
     features: 'Facilities',
     prices: 'Prices',
     explore: 'Things to do',
@@ -30,6 +31,29 @@ export const en: Dictionary = {
       'Our campsite is located in Schwand near Abersee, directly on the southern shore of Lake Wolfgang – between St. Gilgen and Strobl, in the heart of the Salzkammergut lake district. From your pitch it is only a few steps to the pebble beach and the crystal-clear water.',
       'Whether you travel with a tent, caravan or motorhome, you will find your place to unwind here. Our lakefront pitches offer an open view across the lake to the mountains – perfect for swimming, boat trips and as a base for hikes up the Schafberg and Zwölferhorn.',
       'We look forward to welcoming you – the Bruckenberger family.',
+    ],
+  },
+  gallery: {
+    kicker: 'Impressions',
+    title: 'A glimpse of the campsite',
+    lead:
+      'From your pitch to the lakeshore: discover the campsite and the mountain scenery surrounding Lake Wolfgang.',
+    openLabel: 'Open photo',
+    viewerLabel: 'Photo gallery',
+    closeLabel: 'Close gallery',
+    previousLabel: 'Previous photo',
+    nextLabel: 'Next photo',
+    images: [
+      'Pebble beach on Lake Wolfgang overlooking the forested mountains',
+      'Short path from the campsite to Lake Wolfgang',
+      'Spacious camping meadow against the Salzkammergut mountains',
+      'Sunset between caravans and mountains',
+      'Green meadow overlooking the distinctive peaks near Abersee',
+      'View of the meadow and mountains from a pitch',
+      'View from Schafberg over turquoise Lake Wolfgang',
+      'Evening light over the campsite',
+      'Camping lane between caravans beneath a blue sky',
+      'Open meadow and mountain scenery near Abersee',
     ],
   },
   features: {

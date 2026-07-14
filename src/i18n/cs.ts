@@ -8,6 +8,7 @@ export const cs: Dictionary = {
   },
   nav: {
     about: 'Kemp',
+    gallery: 'Galerie',
     features: 'Vybavení',
     prices: 'Ceník',
     explore: 'Výlety',
@@ -30,6 +31,29 @@ export const cs: Dictionary = {
       'Náš kemp leží ve Schwandu u Abersee, přímo na jižním břehu jezera Wolfgangsee – mezi St. Gilgen a Stroblem, v srdci jezerní oblasti Salzkammergut. Z vašeho místa je to jen pár kroků na oblázkovou pláž a do křišťálově čisté vody.',
       'Ať přijedete se stanem, karavanem nebo obytným vozem, najdete u nás místo, kde si odpočinete. Místa u břehu nabízejí volný výhled přes jezero až k horám – ideální ke koupání, na výlety lodí i jako výchozí bod pro túry na Schafberg a Zwölferhorn.',
       'Těšíme se na vaši návštěvu – rodina Bruckenbergerova.',
+    ],
+  },
+  gallery: {
+    kicker: 'Fotografie',
+    title: 'Nahlédněte do kempu',
+    lead:
+      'Od vašeho místa až ke břehu jezera: prohlédněte si kemp a horskou krajinu kolem Wolfgangsee.',
+    openLabel: 'Otevřít fotografii',
+    viewerLabel: 'Fotogalerie',
+    closeLabel: 'Zavřít galerii',
+    previousLabel: 'Předchozí fotografie',
+    nextLabel: 'Další fotografie',
+    images: [
+      'Oblázková pláž u Wolfgangsee s výhledem na zalesněné hory',
+      'Krátká cesta z kempu k jezeru Wolfgangsee',
+      'Prostorná kempovací louka před horami Salzkammergutu',
+      'Západ slunce mezi karavany a horami',
+      'Zelená louka s výhledem na výrazné vrcholy u Abersee',
+      'Výhled z místa na louku a hory',
+      'Pohled ze Schafbergu na tyrkysové jezero Wolfgangsee',
+      'Večerní nálada nad kempem',
+      'Cesta mezi karavany pod modrou oblohou',
+      'Široká louka a horská krajina u Abersee',
     ],
   },
   features: {

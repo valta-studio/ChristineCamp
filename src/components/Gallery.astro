@@ -1,0 +1,379 @@
+---
+import { getImage } from 'astro:assets';
+import lakeShore from '../assets/gallery/lake-shore.JPG';
+import pathToLake from '../assets/gallery/path-to-lake.JPG';
+import campsitePanorama from '../assets/gallery/campsite-mountain-panorama.JPG';
+import sunsetCamping from '../assets/gallery/sunset-camping.JPG';
+import mountainMeadow from '../assets/gallery/mountain-meadow.JPG';
+import pitchMountainView from '../assets/gallery/pitch-mountain-view.JPG';
+import wolfgangseeFromAbove from '../assets/gallery/wolfgangsee-from-above.JPG';
+import campsiteSunset from '../assets/gallery/campsite-sunset.JPG';
+import campingLane from '../assets/gallery/camping-lane.JPG';
+import alpineMeadow from '../assets/gallery/alpine-meadow.JPG';
+import { getT, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+const alts = t('gallery.images', { returnObjects: true }) as string[];
+const sources = [
+  lakeShore,
+  pathToLake,
+  campsitePanorama,
+  sunsetCamping,
+  mountainMeadow,
+  pitchMountainView,
+  wolfgangseeFromAbove,
+  campsiteSunset,
+  campingLane,
+  alpineMeadow,
+];
+
+const photos = await Promise.all(
+  sources.map(async (src, index) => ({
+    alt: alts[index],
+    thumbnail: await getImage({ src, width: 900, format: 'webp', quality: 80 }),
+    full: await getImage({ src, width: 1800, format: 'webp', quality: 86 }),
+  })),
+);
+---
+
+<section class="section gallery-section" id="gallery">
+  <div class="container">
+    <span class="section__kicker">{t('gallery.kicker')}</span>
+    <h2 class="section__title">{t('gallery.title')}</h2>
+    <p class="section__lead">{t('gallery.lead')}</p>
+
+    <div class="gallery">
+      {
+        photos.map((photo, index) => (
+          <button
+            class:list={['gallery__item', { 'gallery__item--wide': index === 0 || index === 2 }]}
+            type="button"
+            data-gallery-index={index}
+            data-full={photo.full.src}
+            data-alt={photo.alt}
+            aria-label={`${t('gallery.openLabel')} ${index + 1}: ${photo.alt}`}
+          >
+            <img
+              src={photo.thumbnail.src}
+              width={photo.thumbnail.attributes.width}
+              height={photo.thumbnail.attributes.height}
+              alt={photo.alt}
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="gallery__shade" aria-hidden="true"></span>
+            <span class="gallery__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <span class="gallery__zoom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-4-4M11 8v6M8 11h6"></path>
+              </svg>
+            </span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <dialog class="lightbox" aria-label={t('gallery.viewerLabel')}>
+    <div class="lightbox__frame">
+      <img class="lightbox__image" alt="" />
+      <button class="lightbox__close" type="button" aria-label={t('gallery.closeLabel')}>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 6l12 12M18 6 6 18"></path>
+        </svg>
+      </button>
+      <button class="lightbox__nav lightbox__nav--previous" type="button" aria-label={t('gallery.previousLabel')}>
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+      <button class="lightbox__nav lightbox__nav--next" type="button" aria-label={t('gallery.nextLabel')}>
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </button>
+      <span class="lightbox__count" aria-live="polite"></span>
+    </div>
+  </dialog>
+</section>
+
+<script>
+  const galleryButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-gallery-index]'));
+  const lightbox = document.querySelector<HTMLDialogElement>('.lightbox');
+  const lightboxImage = lightbox?.querySelector<HTMLImageElement>('.lightbox__image');
+  const lightboxFrame = lightbox?.querySelector<HTMLElement>('.lightbox__frame');
+  const lightboxCount = lightbox?.querySelector<HTMLElement>('.lightbox__count');
+  const closeButton = lightbox?.querySelector<HTMLButtonElement>('.lightbox__close');
+  const previousButton = lightbox?.querySelector<HTMLButtonElement>('.lightbox__nav--previous');
+  const nextButton = lightbox?.querySelector<HTMLButtonElement>('.lightbox__nav--next');
+  let currentIndex = 0;
+
+  const showPhoto = (index: number) => {
+    if (!galleryButtons.length || !lightboxImage || !lightboxCount) return;
+    currentIndex = (index + galleryButtons.length) % galleryButtons.length;
+    const trigger = galleryButtons[currentIndex];
+    lightboxImage.src = trigger.dataset.full ?? '';
+    lightboxImage.alt = trigger.dataset.alt ?? '';
+    lightboxCount.textContent = `${currentIndex + 1} / ${galleryButtons.length}`;
+  };
+
+  galleryButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      showPhoto(index);
+      lightbox?.showModal();
+    });
+  });
+
+  closeButton?.addEventListener('click', () => lightbox?.close());
+  previousButton?.addEventListener('click', () => showPhoto(currentIndex - 1));
+  nextButton?.addEventListener('click', () => showPhoto(currentIndex + 1));
+
+  lightbox?.addEventListener('click', (event) => {
+    if (event.target === lightbox || event.target === lightboxFrame) lightbox.close();
+  });
+
+  lightbox?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') showPhoto(currentIndex - 1);
+    if (event.key === 'ArrowRight') showPhoto(currentIndex + 1);
+  });
+</script>
+
+<style>
+  .gallery-section {
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(53, 184, 186, 0.12), transparent 28rem),
+      var(--mist);
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+
+  .gallery__item {
+    position: relative;
+    min-width: 0;
+    height: 18rem;
+    padding: 0;
+    overflow: hidden;
+    color: #fff;
+    background: var(--blue-deep);
+    border: 0;
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(13, 72, 100, 0.12);
+    cursor: zoom-in;
+  }
+
+  .gallery__item--wide {
+    grid-column: span 2;
+  }
+
+  .gallery__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+  }
+
+  .gallery__item:hover img,
+  .gallery__item:focus-visible img {
+    transform: scale(1.035);
+  }
+
+  .gallery__item:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .gallery__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(8, 39, 54, 0.52));
+    pointer-events: none;
+  }
+
+  .gallery__number {
+    position: absolute;
+    left: 1rem;
+    bottom: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .gallery__zoom {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.65rem;
+    display: grid;
+    width: 2.4rem;
+    height: 2.4rem;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    background: rgba(13, 72, 100, 0.35);
+    backdrop-filter: blur(6px);
+  }
+
+  .lightbox {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: #fff;
+    background: rgba(5, 24, 32, 0.95);
+    border: 0;
+  }
+
+  .lightbox::backdrop {
+    background: rgba(5, 24, 32, 0.95);
+  }
+
+  .lightbox__frame {
+    position: relative;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: 4rem 5rem;
+    place-items: center;
+  }
+
+  .lightbox__image {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    object-fit: contain;
+  }
+
+  .lightbox__close,
+  .lightbox__nav {
+    position: absolute;
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    place-items: center;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+
+  .lightbox__close:hover,
+  .lightbox__nav:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .lightbox__close:focus-visible,
+  .lightbox__nav:focus-visible {
+    outline: 3px solid var(--turquoise);
+    outline-offset: 3px;
+  }
+
+  .lightbox__close {
+    z-index: 1;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .lightbox__nav {
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .lightbox__nav--previous {
+    left: 1rem;
+  }
+
+  .lightbox__nav--next {
+    right: 1rem;
+  }
+
+  .lightbox__count {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 999px;
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 700px) {
+    .gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gallery__item,
+    .gallery__item--wide {
+      grid-column: span 1;
+      height: 13rem;
+    }
+
+    .gallery__item:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .lightbox__frame {
+      padding: 4.5rem 0.75rem 5rem;
+    }
+
+    .lightbox__nav {
+      top: auto;
+      bottom: 0.85rem;
+      transform: none;
+    }
+
+    .lightbox__nav--previous {
+      left: 1rem;
+    }
+
+    .lightbox__nav--next {
+      right: 1rem;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .gallery {
+      gap: 0.65rem;
+    }
+
+    .gallery__item,
+    .gallery__item--wide {
+      height: 10.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery__item img {
+      transition: none;
+    }
+
+    .gallery__item:hover img,
+    .gallery__item:focus-visible img {
+      transform: none;
+    }
+  }
+</style>
