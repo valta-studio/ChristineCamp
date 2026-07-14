@@ -36,7 +36,12 @@ const photos = await Promise.all(
   sources.map(async (src, index) => ({
     alt: alts[index],
     thumbnail: await getImage({ src, width: 900, format: 'webp', quality: 80 }),
-    full: await getImage({ src, width: 1800, format: 'webp', quality: 86 }),
+    full: await getImage({
+      src,
+      width: src.width > src.height ? 1440 : 1080,
+      format: 'webp',
+      quality: 86,
+    }),
   })),
 );
 ---
