@@ -39,8 +39,20 @@ const rows = t('prices.rows', { returnObjects: true }) as PriceRow[];
                   {row.label}
                   {row.note && <span class="row-note">{row.note}</span>}
                 </th>
-                <td>{row.off}</td>
-                <td>{row.peak}</td>
+                <td>
+                  <span class="mobile-season" aria-hidden="true">
+                    <strong>{t('prices.colOff')}</strong>
+                    <small>{t('prices.colOffSub')}</small>
+                  </span>
+                  <span class="price-value">{row.off}</span>
+                </td>
+                <td>
+                  <span class="mobile-season" aria-hidden="true">
+                    <strong>{t('prices.colPeak')}</strong>
+                    <small>{t('prices.colPeakSub')}</small>
+                  </span>
+                  <span class="price-value">{row.peak}</span>
+                </td>
               </tr>
             ))
           }
@@ -109,6 +121,10 @@ const rows = t('prices.rows', { returnObjects: true }) as PriceRow[];
     white-space: nowrap;
   }
 
+  .mobile-season {
+    display: none;
+  }
+
   tbody tr:nth-child(even) {
     background: var(--mist);
   }
@@ -128,5 +144,62 @@ const rows = t('prices.rows', { returnObjects: true }) as PriceRow[];
     margin-top: 0.9rem;
     font-size: 0.85rem;
     color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    table {
+      min-width: 0;
+      font-size: 0.8rem;
+    }
+
+    thead th {
+      padding: 0.55rem 0.5rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+
+    thead th + th {
+      width: auto;
+    }
+
+    .th-sub {
+      font-size: 0.6rem;
+    }
+
+    tbody th {
+      padding: 0.5rem 0.5rem;
+      font-size: 0.82rem;
+      line-height: 1.3;
+    }
+
+    tbody td {
+      padding: 0.5rem 0.5rem;
+      font-size: 0.82rem;
+    }
+
+    .price-value {
+      font-weight: 700;
+    }
+
+    tbody td:last-child .price-value {
+      color: var(--accent);
+    }
+
+    .row-note {
+      font-size: 0.72rem;
+      line-height: 1.3;
+    }
+  }
+
+  @media (max-width: 380px) {
+    thead th,
+    tbody th,
+    tbody td {
+      padding: 0.45rem 0.35rem;
+    }
+
+    table {
+      font-size: 0.75rem;
+    }
   }
 </style>
