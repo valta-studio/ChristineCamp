@@ -24,6 +24,11 @@ export interface Sight {
   text: string;
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface Dictionary {
   meta: {
     title: string;
@@ -36,6 +41,7 @@ export interface Dictionary {
     prices: string;
     explore: string;
     location: string;
+    faq: string;
     contact: string;
     langLabel: string;
     menuLabel: string;
@@ -95,6 +101,12 @@ export interface Dictionary {
     directions: string;
     mapLink: string;
     mapTitle: string;
+  };
+  faq: {
+    kicker: string;
+    title: string;
+    lead: string;
+    items: FaqItem[];
   };
   contact: {
     kicker: string;

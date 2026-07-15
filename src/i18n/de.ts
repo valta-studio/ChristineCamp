@@ -13,6 +13,7 @@ export const de: Dictionary = {
     prices: 'Preise',
     explore: 'Ausflüge',
     location: 'Anfahrt',
+    faq: 'FAQ',
     contact: 'Kontakt',
     langLabel: 'Sprache',
     menuLabel: 'Menü',
@@ -187,6 +188,48 @@ export const de: Dictionary = {
     directions: 'Route planen',
     mapLink: 'Größere Karte anzeigen',
     mapTitle: 'Karte: Camping Primusbauer am Wolfgangsee',
+  },
+  faq: {
+    kicker: 'Gut zu wissen',
+    title: 'Häufige Fragen',
+    lead: 'Hier finden Sie die wichtigsten Informationen für Ihren Aufenthalt am Wolfgangsee.',
+    items: [
+      {
+        question: 'Wann ist der Campingplatz geöffnet?',
+        answer:
+          'Unsere Campingsaison läuft von Mai bis September. Die Preise unterscheiden zwischen Neben- und Hauptsaison.',
+      },
+      {
+        question: 'Kann ich mit Zelt, Wohnwagen oder Wohnmobil anreisen?',
+        answer:
+          'Ja. Wir bieten Stellplätze für Zelte, Wohnwagen, Campingbusse und Wohnmobile. Auch ein zusätzliches Zelt oder Fahrzeug ist gegen Aufpreis möglich.',
+      },
+      {
+        question: 'Wie kann ich einen Stellplatz reservieren?',
+        answer:
+          'Für Anfragen und Reservierungen kontaktieren Sie uns bitte telefonisch oder per E-Mail. Wir informieren Sie gerne über die aktuelle Verfügbarkeit.',
+      },
+      {
+        question: 'Hat der Campingplatz direkten Zugang zum Wolfgangsee?',
+        answer:
+          'Ja. Vom Campingplatz sind es nur wenige Schritte zum eigenen Zugang am Kiesstrand und zum klaren Wasser des Wolfgangsees.',
+      },
+      {
+        question: 'Sind Hunde auf dem Campingplatz erlaubt?',
+        answer:
+          'Ja, Hunde sind herzlich willkommen. Der Preis pro Nacht richtet sich nach der jeweiligen Saison und ist in der Preisliste angegeben.',
+      },
+      {
+        question: 'Gibt es Stromanschlüsse und warme Duschen?',
+        answer:
+          'Ja. Strom wird je nach Campingart nach Verbrauch oder pauschal verrechnet. Warme Münzduschen stehen ebenfalls zur Verfügung.',
+      },
+      {
+        question: 'Kann ich einen Stellplatz direkt am See buchen?',
+        answer:
+          'Seeuferplätze sind gegen einen saisonabhängigen Zuschlag verfügbar. Bitte fragen Sie bei Ihrer Reservierung nach der aktuellen Verfügbarkeit.',
+      },
+    ],
   },
   contact: {
     kicker: 'Kontakt',

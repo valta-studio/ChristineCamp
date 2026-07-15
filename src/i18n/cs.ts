@@ -13,6 +13,7 @@ export const cs: Dictionary = {
     prices: 'Ceník',
     explore: 'Výlety',
     location: 'Kudy k nám',
+    faq: 'FAQ',
     contact: 'Kontakt',
     langLabel: 'Jazyk',
     menuLabel: 'Menu',
@@ -187,6 +188,48 @@ export const cs: Dictionary = {
     directions: 'Naplánovat trasu',
     mapLink: 'Zobrazit větší mapu',
     mapTitle: 'Mapa: Camping Primusbauer u jezera Wolfgangsee',
+  },
+  faq: {
+    kicker: 'Praktické informace',
+    title: 'Časté otázky',
+    lead: 'Nejdůležitější informace pro plánování vašeho pobytu u jezera Wolfgangsee.',
+    items: [
+      {
+        question: 'Kdy je kemp otevřený?',
+        answer:
+          'Kempovací sezóna trvá od května do září. Ceny se liší podle hlavní sezóny a mimosezóny.',
+      },
+      {
+        question: 'Mohu přijet se stanem, karavanem nebo obytným vozem?',
+        answer:
+          'Ano. Nabízíme místa pro stany, karavany, obytné dodávky i obytné vozy. Za poplatek je možné přidat také další stan nebo vozidlo.',
+      },
+      {
+        question: 'Jak si mohu rezervovat místo?',
+        answer:
+          'S dotazy a rezervacemi se na nás obraťte telefonicky nebo e-mailem. Rádi vám potvrdíme aktuální dostupnost.',
+      },
+      {
+        question: 'Má kemp přímý přístup k jezeru Wolfgangsee?',
+        answer:
+          'Ano. Z kempu je to jen pár kroků k vlastnímu přístupu na oblázkovou pláž a do čisté vody jezera Wolfgangsee.',
+      },
+      {
+        question: 'Jsou v kempu povoleni psi?',
+        answer:
+          'Ano, psi jsou u nás vítáni. Cena za noc se řídí sezónou a najdete ji v ceníku.',
+      },
+      {
+        question: 'Jsou k dispozici elektrické přípojky a teplé sprchy?',
+        answer:
+          'Ano. Elektřina se podle typu kempování účtuje dle spotřeby nebo paušální sazbou. K dispozici jsou také teplé sprchy na mince.',
+      },
+      {
+        question: 'Mohu si rezervovat místo přímo u jezera?',
+        answer:
+          'Místa na břehu jezera jsou k dispozici za sezónní příplatek. Na aktuální dostupnost se prosím zeptejte při rezervaci.',
+      },
+    ],
   },
   contact: {
     kicker: 'Kontakt',

@@ -13,6 +13,7 @@ export const en: Dictionary = {
     prices: 'Prices',
     explore: 'Things to do',
     location: 'Directions',
+    faq: 'FAQ',
     contact: 'Contact',
     langLabel: 'Language',
     menuLabel: 'Menu',
@@ -187,6 +188,48 @@ export const en: Dictionary = {
     directions: 'Plan your route',
     mapLink: 'View larger map',
     mapTitle: 'Map: Camping Primusbauer at Lake Wolfgang',
+  },
+  faq: {
+    kicker: 'Good to know',
+    title: 'Frequently asked questions',
+    lead: 'Find the essential information for planning your stay at Lake Wolfgang.',
+    items: [
+      {
+        question: 'When is the campsite open?',
+        answer:
+          'Our camping season runs from May to September. Prices differ between the off-season and peak season.',
+      },
+      {
+        question: 'Can I stay with a tent, caravan or motorhome?',
+        answer:
+          'Yes. We offer pitches for tents, caravans, camper vans and motorhomes. An additional tent or vehicle can also be added for a fee.',
+      },
+      {
+        question: 'How can I reserve a pitch?',
+        answer:
+          'For enquiries and reservations, please contact us by phone or e-mail. We will be happy to confirm current availability.',
+      },
+      {
+        question: 'Does the campsite have direct access to Lake Wolfgang?',
+        answer:
+          'Yes. The campsite is only a few steps from its own access to the pebble beach and the clear water of Lake Wolfgang.',
+      },
+      {
+        question: 'Are dogs allowed at the campsite?',
+        answer:
+          'Yes, dogs are very welcome. The nightly price depends on the season and is listed in the price table.',
+      },
+      {
+        question: 'Are electricity hook-ups and hot showers available?',
+        answer:
+          'Yes. Depending on your camping setup, electricity is charged by usage or at a flat nightly rate. Coin-operated hot showers are also available.',
+      },
+      {
+        question: 'Can I book a pitch directly by the lake?',
+        answer:
+          'Lakefront pitches are available for a seasonal surcharge. Please ask about current availability when making your reservation.',
+      },
+    ],
   },
   contact: {
     kicker: 'Contact',

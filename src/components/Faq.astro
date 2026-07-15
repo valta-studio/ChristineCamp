@@ -1,0 +1,129 @@
+---
+import { getT, type FaqItem, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+const items = t('faq.items', { returnObjects: true }) as FaqItem[];
+---
+
+<section class="section section--tint" id="faq">
+  <div class="container faq">
+    <span class="section__kicker">{t('faq.kicker')}</span>
+    <h2 class="section__title">{t('faq.title')}</h2>
+    <p class="section__lead">{t('faq.lead')}</p>
+
+    <div class="faq__list">
+      {
+        items.map((item) => (
+          <details class="faq__item">
+            <summary class="faq__question">
+              <span>{item.question}</span>
+              <span class="faq__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </span>
+            </summary>
+            <div class="faq__answer">
+              <p>{item.answer}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    max-width: 900px;
+  }
+
+  .faq__list {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .faq__item {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 14px rgba(13, 72, 100, 0.05);
+  }
+
+  .faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    color: var(--blue-deep);
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.3;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question:focus-visible {
+    outline: 3px solid var(--turquoise);
+    outline-offset: -3px;
+  }
+
+  .faq__icon {
+    display: grid;
+    flex: 0 0 2rem;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    color: var(--blue-dark);
+    background: var(--mist);
+    border-radius: 50%;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .faq__item[open] .faq__icon {
+    color: #fff;
+    background: var(--blue);
+    transform: rotate(180deg);
+  }
+
+  .faq__answer {
+    padding: 0 1.25rem 1.15rem;
+    color: var(--muted);
+  }
+
+  .faq__answer p {
+    max-width: 48rem;
+    margin: 0;
+  }
+
+  @media (max-width: 560px) {
+    .faq__question {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    .faq__answer {
+      padding: 0 1rem 1rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq__icon {
+      transition: none;
+    }
+  }
+</style>
